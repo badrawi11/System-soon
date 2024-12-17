@@ -485,4 +485,100 @@ tokens.forEach(token => {
 
 
 
+client.once("ready", () => {
+  console.log(`bot is ready! ${client.user.tag}!`);
+  console.log(`Code by Iraq Paradise On Top`);
+  console.log(`@discord.gg/xa`);
+
+  const statusType = "invisible"; // online = الاخضر | dnd = الاحمر | idle = الاصفر | invisible = غير متصل
+  client.user.setPresence({
+    status: statusType,
+    activities: [
+      {
+        name: "Iraq Paradise On Top", // الاسم
+        type: ActivityType.playing, // streaming | playing | listening
+        url: "https://www.twitch.tv/", // stream link
+      },
+    ],
+  });
+});
+
+
+
+const TOKEN = (process.env.TOKEN); // استبدلها بتوكن البوت الخاص بك.
+const VOICE_CHANNEL_ID = '1191847283029975074'; // استبدلها بـ ID القناة الصوتية.
+
+client.once('ready', () => {
+    console.log(`تم تسجيل الدخول كبوت: ${client.user.tag}`);
+
+    // الانضمام إلى القناة الصوتية
+    const voiceChannel = client.channels.cache.get(VOICE_CHANNEL_ID);
+
+    if (!voiceChannel || voiceChannel.type !== 2) { // 2 يعني Voice Channel
+        console.error('تأكد من أن ID القناة صحيح وأنها قناة صوتية!');
+        return;
+    }
+
+    joinVoiceChannel({
+        channelId: voiceChannel.id,
+        guildId: voiceChannel.guild.id,
+        adapterCreator: voiceChannel.guild.voiceAdapterCreator,
+    });
+
+    console.log(`تم الانضمام إلى القناة الصوتية: ${voiceChannel.name}`);
+});
+
+client.login(process.env.TOKEN); //توكن بوت بدال Token
+
+
+
+
+
+
+
+
+
+
+
+
+// توكنك هنا لا تنسى تغير
+// ايدي الروم اللي بينرسل بها الاذكار
+const CHANNEL_ID = '1191847283222921234';
+
+// الاذكار ، تقدر تزيدهم
+const azkar = [
+    //"سبحان الله وبحمده، سبحان الله العظيم",
+    //"لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير",
+    //"اللهم صل وسلم على نبينا محمد",
+    //"استغفر الله العظيم واتوب إليه",
+    //"لا حول ولا قوة إلا بالله العلي العظيم",
+   // "الحمد لله رب العالمين",
+   // "سبحان الله عدد ما خلق في السماء، سبحان الله عدد ما خلق في الأرض",
+   // "اللهم إنك عفو تحب العفو فاعف عني",
+   // "رب اغفر لي وتب علي إنك أنت التواب الرحيم",
+   // "يا حي يا قيوم برحمتك أستغيث، أصلح لي شأني كله ولا تكلني إلى نفسي طرفة عين",
+    //"لا إله إلا الله محمد رسول الله",
+    //"اللهم اجعلنا من الذاكرين الشاكرين",
+    "اللهم ارزقني حبك وحب من يحبك وحب كل عمل يقربني إلى حبك"
+];
+
+client.once('ready', () => {
+    console.log(`Logged in as ${client.user.tag}!`);
+
+    
+    function sendRandomAzkar() {
+        const channel = client.channels.cache.get(CHANNEL_ID);
+        if (channel) {
+            const randomAzkar = azkar[Math.floor(Math.random() * azkar.length)];
+            channel.send(randomAzkar);
+        } else {
+            console.log("Channel not found");
+        }
+    }
+
+    setInterval(sendRandomAzkar, 1800000);
+});
+
+
+
 
